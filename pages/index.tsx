@@ -24,9 +24,11 @@ export default function Home({ films }: FilmProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Sidebar />
-      <Trending trendingFilms={trendingFilms} />
-      <Recommendation recommendation={recommendedFilms} />
+      <main className="bg-slate-900 text-white">
+        <Sidebar />
+        <Trending trendingFilms={trendingFilms} />
+        <Recommendation recommendedFilms={recommendedFilms} />
+      </main>
     </div>
   );
 }
