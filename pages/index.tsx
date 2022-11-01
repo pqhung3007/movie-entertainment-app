@@ -1,7 +1,21 @@
-import type { NextPage } from "next";
 import Head from "next/head";
+import { useState, useEffect } from "react";
+import Recommendation from "../components/Recommendation";
+import Sidebar from "../components/Sidebar";
+import Trending from "../components/Trending";
+import { Film } from "../models";
+interface FilmProps {
+  films: Film[];
+}
 
-const Home: NextPage = () => {
+export default function Home({ films }: FilmProps) {
+  const trendingFilms: Film[] = films.filter(
+    (film) => film.isTrending === true
+  );
+  const recommendedFilms: Film[] = films.filter(
+    (film) => film.isTrending === false
+  );
+
   return (
     <div>
       <Head>
@@ -10,11 +24,18 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className="text-3xl text-sky-500  font-serif">
-        Welcome to Movie App
-      </h1>
+      <Sidebar />
+      <Trending trendingFilms={trendingFilms} />
+      <Recommendation recommendation={recommendedFilms} />
     </div>
   );
-};
+}
 
-export default Home;
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:3000/data.json");
+  const films = await res.json();
+
+  return {
+    props: { films },
+  };
+}
