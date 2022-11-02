@@ -2,3 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.swiper-slide:nth-child(odd),
+.swiper-slide:nth-child(even) {
+  width: 75%;
+  height: auto;
+}
