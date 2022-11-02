@@ -42,7 +42,9 @@ function Trending({ trendingFilms }: any) {
                       <span>{rating}</span>
                     </div>
                   </div>
-                  <h2 className="font-bold text-lg md:text-2xl">{title}</h2>
+                  <h2 className="font-bold text-lg md:text-2xl tracking-wide">
+                    {title}
+                  </h2>
                 </div>
 
                 <div className="absolute right-2 top-2 group">
@@ -55,7 +57,7 @@ function Trending({ trendingFilms }: any) {
                     >
                       <path
                         d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"
-                        stroke-width="1.5"
+                        strokeWidth="1.5"
                         fill="none"
                       ></path>
                     </svg>
