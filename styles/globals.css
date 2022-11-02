@@ -8,3 +8,9 @@
   width: 450px;
   height: auto;
 }
+
+@layer components {
+  .nav-item {
+    @apply hover:fill-red-500 hover:cursor-pointer;
+  }
+}

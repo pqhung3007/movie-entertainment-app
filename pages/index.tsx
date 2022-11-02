@@ -26,8 +26,11 @@ export default function Home({ films }: FilmProps) {
 
       <main className="bg-slate-900 text-white">
         <Sidebar />
-        <Trending trendingFilms={trendingFilms} />
-        <Recommendation recommendedFilms={recommendedFilms} />
+
+        <div className="pt-40">
+          <Trending trendingFilms={trendingFilms} />
+          <Recommendation recommendedFilms={recommendedFilms} />
+        </div>
       </main>
     </div>
   );
