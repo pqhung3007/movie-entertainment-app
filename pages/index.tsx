@@ -1,7 +1,5 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
 import Recommendation from "../components/Recommendation";
-import Sidebar from "../components/Sidebar";
 import Trending from "../components/Trending";
 import { Film } from "../models";
 interface FilmProps {
