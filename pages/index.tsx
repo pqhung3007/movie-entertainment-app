@@ -3,22 +3,22 @@ import Head from "next/head";
 import FilmList from "../components/FilmList";
 import Trending from "../components/Trending";
 import SearchBox from "../components/SearchBox";
-import { Film } from "../models";
+import { Data } from "../models";
 import fetchData from "../utils/fetcher";
-interface FilmProps {
-  films: Film[];
+interface DataProps {
+  films: Data[];
 }
 
-export default function Home({ films }: FilmProps) {
+export default function Home({ films }: DataProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const trendingFilms: Film[] = films.filter(
+  const trendingFilms: Data[] = films.filter(
     (film) => film.isTrending === true
   );
-  const recommendedFilms: Film[] = films.filter(
+  const recommendedFilms: Data[] = films.filter(
     (film) => film.isTrending === false
   );
-  const filteredFilms: Film[] = films.filter((film) =>
+  const filteredFilms: Data[] = films.filter((film) =>
     film.title.toLowerCase().includes(searchQuery)
   );
 

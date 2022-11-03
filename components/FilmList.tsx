@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { Film } from "../models";
+import { Data } from "../models";
 
 interface FilmsProps {
   title: string;
@@ -12,7 +12,7 @@ function FilmList({ title, films }: FilmsProps) {
     <div className="max-w-7xl mx-auto px-8 font-extralight">
       <h1 className="mb-4 text-3xl">{title}</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
-        {films.map((film: Film) => {
+        {films.map((film: Data) => {
           const { id, title, thumbnail, year, category, rating } = film;
           return (
             <div className="" key={id}>

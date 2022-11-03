@@ -2,12 +2,12 @@ import React from "react";
 import Head from "next/head";
 import FilmList from "../components/FilmList";
 import fetchData from "../utils/fetcher";
-import { Film } from "../models";
-interface FilmProps {
-  movies: Film[];
+import { Data } from "../models";
+interface MovieProps {
+  movies: Data[];
 }
 
-export default function Movies({ movies }: FilmProps) {
+export default function Movies({ movies }: MovieProps) {
   return (
     <div>
       <Head>
@@ -27,7 +27,7 @@ export default function Movies({ movies }: FilmProps) {
 
 export async function getStaticProps() {
   const data = await fetchData();
-  const movies = data.filter((element: Film) => element.category === "Movie");
+  const movies = data.filter((element: Data) => element.category === "Movie");
 
   return {
     props: { movies },
