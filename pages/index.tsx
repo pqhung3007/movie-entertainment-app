@@ -30,7 +30,7 @@ export default function Home({ films }: FilmProps) {
       </Head>
 
       <main className="bg-slate-900 text-white min-h-screen">
-        <div className="pt-28 lg:pt-4 lg:pl-32">
+        <div className="py-28 lg:pt-4 lg:pl-32">
           <SearchBox setSearchQuery={setSearchQuery} />
           {searchQuery ? (
             <FilmList
