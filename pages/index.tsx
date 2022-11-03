@@ -53,7 +53,7 @@ export default function Home({ films }: FilmProps) {
 }
 
 export async function getStaticProps() {
-  const films = fetchData();
+  const films = await fetchData();
 
   return {
     props: { films },
