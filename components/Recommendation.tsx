@@ -2,10 +2,15 @@
 import React from "react";
 import { Film } from "../models";
 
-function Recommendation({ recommendedFilms }: any) {
+interface FilmsProps {
+  title: string;
+  recommendedFilms: any[];
+}
+
+function Recommendation({ title, recommendedFilms }: FilmsProps) {
   return (
     <div className="max-w-7xl mx-auto px-8 font-extralight">
-      <h1 className="mb-4 text-3xl">Recommended for you</h1>
+      <h1 className="mb-4 text-3xl">{title}</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
         {recommendedFilms.map((film: Film) => {
           const { id, title, thumbnail, year, category, rating } = film;

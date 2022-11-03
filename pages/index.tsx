@@ -17,6 +17,9 @@ export default function Home({ films }: FilmProps) {
   const recommendedFilms: Film[] = films.filter(
     (film) => film.isTrending === false
   );
+  const filteredFilms: Film[] = films.filter((film) =>
+    film.title.toLowerCase().includes(searchQuery)
+  );
 
   return (
     <div>
@@ -26,15 +29,23 @@ export default function Home({ films }: FilmProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="bg-slate-900 text-white">
+      <main className="bg-slate-900 text-white min-h-screen">
         <div className="pt-28 lg:pt-4 lg:pl-32">
           <SearchBox setSearchQuery={setSearchQuery} />
           {searchQuery ? (
-            <Recommendation recommendedFilms={recommendedFilms} />
+            <Recommendation
+              title={`Found ${filteredFilms.length} ${
+                filteredFilms.length > 1 ? "results" : "result"
+              } for '${searchQuery}'`}
+              recommendedFilms={filteredFilms}
+            />
           ) : (
             <>
               <Trending trendingFilms={trendingFilms} />
-              <Recommendation recommendedFilms={recommendedFilms} />
+              <Recommendation
+                title="Recommended for you"
+                recommendedFilms={recommendedFilms}
+              />
             </>
           )}
         </div>
