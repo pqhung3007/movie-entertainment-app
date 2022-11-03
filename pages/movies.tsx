@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import CardList from "../components/CardList";
+import SearchBox from "../components/SearchBox";
 import fetchData from "../utils/fetcher";
 import { Data } from "../models";
 interface MovieProps {
@@ -8,6 +9,12 @@ interface MovieProps {
 }
 
 export default function Movies({ movies }: MovieProps) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredMovies = movies.filter((element) =>
+    element.title.toLowerCase().includes(searchQuery)
+  );
+
   return (
     <div>
       <Head>
@@ -18,7 +25,23 @@ export default function Movies({ movies }: MovieProps) {
 
       <main className="bg-slate-900 text-white min-h-screen">
         <div className="py-28 lg:pt-4 lg:pl-32">
-          <CardList title="Movies" films={movies} />
+          <SearchBox
+            placeholder="Search for movies"
+            setSearchQuery={setSearchQuery}
+          />
+
+          {searchQuery ? (
+            <CardList
+              title={`Found ${filteredMovies.length} ${
+                filteredMovies.length > 1 ? "results" : "result"
+              } for '${searchQuery}'`}
+              films={filteredMovies}
+            />
+          ) : (
+            <>
+              <CardList title="Movies" films={movies} />
+            </>
+          )}
         </div>
       </main>
     </div>
