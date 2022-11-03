@@ -1,9 +1,10 @@
+import { useState } from "react";
 import Head from "next/head";
 import FilmList from "../components/FilmList";
 import Trending from "../components/Trending";
 import SearchBox from "../components/SearchBox";
 import { Film } from "../models";
-import { useState } from "react";
+import fetchData from "../utils/fetcher";
 interface FilmProps {
   films: Film[];
 }
@@ -52,8 +53,7 @@ export default function Home({ films }: FilmProps) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/data.json");
-  const films = await res.json();
+  const films = fetchData();
 
   return {
     props: { films },
