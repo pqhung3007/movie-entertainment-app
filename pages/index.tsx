@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
-import FilmList from "../components/FilmList";
+import CardList from "../components/CardList";
 import Trending from "../components/Trending";
 import SearchBox from "../components/SearchBox";
 import { Data } from "../models";
@@ -34,7 +34,7 @@ export default function Home({ films }: DataProps) {
         <div className="py-28 lg:pt-4 lg:pl-32">
           <SearchBox setSearchQuery={setSearchQuery} />
           {searchQuery ? (
-            <FilmList
+            <CardList
               title={`Found ${filteredFilms.length} ${
                 filteredFilms.length > 1 ? "results" : "result"
               } for '${searchQuery}'`}
@@ -43,7 +43,7 @@ export default function Home({ films }: DataProps) {
           ) : (
             <>
               <Trending trendingFilms={trendingFilms} />
-              <FilmList title="Recommended for you" films={recommendedFilms} />
+              <CardList title="Recommended for you" films={recommendedFilms} />
             </>
           )}
         </div>

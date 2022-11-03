@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import FilmList from "../components/FilmList";
+import CardList from "../components/CardList";
 import fetchData from "../utils/fetcher";
 import { Data } from "../models";
 interface MovieProps {
@@ -18,7 +18,7 @@ export default function Movies({ movies }: MovieProps) {
 
       <main className="bg-slate-900 text-white min-h-screen">
         <div className="py-28 lg:pt-4 lg:pl-32">
-          <FilmList title="Movies" films={movies} />
+          <CardList title="Movies" films={movies} />
         </div>
       </main>
     </div>
