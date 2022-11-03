@@ -4,15 +4,15 @@ import { Film } from "../models";
 
 interface FilmsProps {
   title: string;
-  recommendedFilms: any[];
+  films: any[];
 }
 
-function Recommendation({ title, recommendedFilms }: FilmsProps) {
+function FilmList({ title, films }: FilmsProps) {
   return (
     <div className="max-w-7xl mx-auto px-8 font-extralight">
       <h1 className="mb-4 text-3xl">{title}</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
-        {recommendedFilms.map((film: Film) => {
+        {films.map((film: Film) => {
           const { id, title, thumbnail, year, category, rating } = film;
           return (
             <div className="" key={id}>
@@ -61,4 +61,4 @@ function Recommendation({ title, recommendedFilms }: FilmsProps) {
   );
 }
 
-export default Recommendation;
+export default FilmList;

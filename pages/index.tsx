@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Recommendation from "../components/Recommendation";
+import FilmList from "../components/FilmList";
 import Trending from "../components/Trending";
 import SearchBox from "../components/SearchBox";
 import { Film } from "../models";
@@ -33,19 +33,16 @@ export default function Home({ films }: FilmProps) {
         <div className="pt-28 lg:pt-4 lg:pl-32">
           <SearchBox setSearchQuery={setSearchQuery} />
           {searchQuery ? (
-            <Recommendation
+            <FilmList
               title={`Found ${filteredFilms.length} ${
                 filteredFilms.length > 1 ? "results" : "result"
               } for '${searchQuery}'`}
-              recommendedFilms={filteredFilms}
+              films={filteredFilms}
             />
           ) : (
             <>
               <Trending trendingFilms={trendingFilms} />
-              <Recommendation
-                title="Recommended for you"
-                recommendedFilms={recommendedFilms}
-              />
+              <FilmList title="Recommended for you" films={recommendedFilms} />
             </>
           )}
         </div>
