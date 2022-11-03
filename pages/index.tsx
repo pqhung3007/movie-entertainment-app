@@ -1,12 +1,16 @@
 import Head from "next/head";
 import Recommendation from "../components/Recommendation";
 import Trending from "../components/Trending";
+import SearchBox from "../components/SearchBox";
 import { Film } from "../models";
+import { useState } from "react";
 interface FilmProps {
   films: Film[];
 }
 
 export default function Home({ films }: FilmProps) {
+  const [searchQuery, setSearchQuery] = useState("");
+
   const trendingFilms: Film[] = films.filter(
     (film) => film.isTrending === true
   );
@@ -23,9 +27,16 @@ export default function Home({ films }: FilmProps) {
       </Head>
 
       <main className="bg-slate-900 text-white">
-        <div className="pt-40 lg:pl-32">
-          <Trending trendingFilms={trendingFilms} />
-          <Recommendation recommendedFilms={recommendedFilms} />
+        <div className="pt-28 lg:pt-4 lg:pl-32">
+          <SearchBox setSearchQuery={setSearchQuery} />
+          {searchQuery ? (
+            <Recommendation recommendedFilms={recommendedFilms} />
+          ) : (
+            <>
+              <Trending trendingFilms={trendingFilms} />
+              <Recommendation recommendedFilms={recommendedFilms} />
+            </>
+          )}
         </div>
       </main>
     </div>
