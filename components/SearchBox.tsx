@@ -1,10 +1,11 @@
 import React, { Dispatch, SetStateAction } from "react";
 
 interface QueryProps {
+  placeholder: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 
-export default function SearchBox({ setSearchQuery }: QueryProps) {
+export default function SearchBox({ placeholder, setSearchQuery }: QueryProps) {
   return (
     <div className="mt-4 mb-8">
       <form action="">
@@ -19,7 +20,7 @@ export default function SearchBox({ setSearchQuery }: QueryProps) {
 
           <input
             type="text"
-            placeholder="Search for movies or TV series"
+            placeholder={placeholder}
             className="w-full py-2 bg-transparent focus:outline-none focus:border-b focus:border-b-blue-50 font-extralight"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
