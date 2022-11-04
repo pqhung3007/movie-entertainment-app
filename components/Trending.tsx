@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import { Pagination } from "swiper";
-import { Film } from "../models";
+import { Data } from "../models";
 
 function Trending({ trendingFilms }: any) {
   return (
@@ -21,7 +21,7 @@ function Trending({ trendingFilms }: any) {
         modules={[Pagination]}
         className="mb-12"
       >
-        {trendingFilms.map((film: Film, index: number) => {
+        {trendingFilms.map((film: Data, index: number) => {
           const { id, title, thumbnail, year, category, rating } = film;
           return (
             <div className="relative w-2/3" key={id}>
