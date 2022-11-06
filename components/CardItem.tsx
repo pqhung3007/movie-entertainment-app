@@ -1,6 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Data } from "../models";
+import {
+  addBookmarkToMovies,
+  addBookmarkToSeries,
+} from "../features/movieSlice";
 
 export default function CardItem({
   id,
@@ -10,10 +15,16 @@ export default function CardItem({
   category,
   rating,
 }: Data) {
+  const dispatch = useDispatch();
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   const addToBookmark = () => {
     setIsBookmarked((isBookmarked) => !isBookmarked);
+    if (category === "Movie") {
+      dispatch(addBookmarkToMovies(id));
+    } else if (category === "TV Series") {
+      dispatch(addBookmarkToSeries(id));
+    }
   };
   return (
     <div className="card-item" key={id}>

@@ -2,7 +2,7 @@ export interface Data {
   title: string;
   id: number;
   thumbnail: Thumbnail;
-  year: string;
+  year: number;
   category: string;
   rating: string;
   isBookmarked: boolean;
