@@ -26,6 +26,15 @@ export const movieSlice = createSlice({
       state.movies[movieIndex].isBookmarked = true;
       state.bookmarkedMovies.push(state.movies[movieIndex]);
     },
+    removeBookmarkFromMovies(state, action) {
+      const movieIndex = state.movies.findIndex(
+        (element: any) => element.id === action.payload
+      );
+      console.log(movieIndex);
+
+      state.movies[movieIndex].isBookmarked = false;
+      state.bookmarkedMovies.filter((movie) => movie.id !== action.payload);
+    },
     addBookmarkToSeries(state, action) {
       const movieIndex = state.movies.findIndex(
         (element: any) => element.id === action.payload
@@ -34,9 +43,23 @@ export const movieSlice = createSlice({
       state.movies[movieIndex].isBookmarked = true;
       state.bookmarkedSeries.push(state.movies[movieIndex]);
     },
+    removeBookmarkFromSeries(state, action) {
+      const movieIndex = state.movies.findIndex(
+        (element: any) => element.id === action.payload
+      );
+      console.log(movieIndex);
+
+      state.movies[movieIndex].isBookmarked = false;
+      state.bookmarkedSeries.filter((series) => series.id !== action.payload);
+    },
   },
 });
 
-export const { addBookmarkToMovies, addBookmarkToSeries } = movieSlice.actions;
+export const {
+  addBookmarkToMovies,
+  addBookmarkToSeries,
+  removeBookmarkFromMovies,
+  removeBookmarkFromSeries,
+} = movieSlice.actions;
 
 export default movieSlice.reducer;

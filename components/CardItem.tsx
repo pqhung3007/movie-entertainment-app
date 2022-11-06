@@ -5,6 +5,8 @@ import { Data } from "../models";
 import {
   addBookmarkToMovies,
   addBookmarkToSeries,
+  removeBookmarkFromMovies,
+  removeBookmarkFromSeries,
 } from "../features/movieSlice";
 
 export default function CardItem({
@@ -18,12 +20,20 @@ export default function CardItem({
   const dispatch = useDispatch();
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  const addToBookmark = () => {
-    setIsBookmarked((isBookmarked) => !isBookmarked);
-    if (category === "Movie") {
-      dispatch(addBookmarkToMovies(id));
-    } else if (category === "TV Series") {
-      dispatch(addBookmarkToSeries(id));
+  const handleBookmark = () => {
+    setIsBookmarked((prevState) => !prevState);
+    if (isBookmarked === false) {
+      if (category === "Movie") {
+        dispatch(addBookmarkToMovies(id));
+      } else if (category === "TV Series") {
+        dispatch(addBookmarkToSeries(id));
+      }
+    } else if (isBookmarked === true) {
+      if (category === "Movie") {
+        dispatch(removeBookmarkFromMovies(id));
+      } else if (category === "TV Series") {
+        dispatch(removeBookmarkFromSeries(id));
+      }
     }
   };
   return (
@@ -39,7 +49,7 @@ export default function CardItem({
         <div className="absolute right-2 top-2 group">
           <button
             className="h-8 w-8 flex justify-center items-center rounded-full bg-black/80 group-hover:bg-white"
-            onClick={addToBookmark}
+            onClick={handleBookmark}
           >
             <svg
               width="12"
