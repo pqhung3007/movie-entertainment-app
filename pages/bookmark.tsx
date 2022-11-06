@@ -1,21 +1,13 @@
 import React from "react";
 import Head from "next/head";
 import CardList from "../components/CardList";
-import fetchData from "../utils/fetcher";
-import { Data } from "../models";
+import CardItem from "../components/CardItem";
+import { useSelector } from "react-redux";
 
-interface DataProps {
-  films: Data[];
-}
-
-export default function Bookmark({ films }: DataProps) {
-  const bookmarkedFilms = films.filter(
-    (film) => film.category === "Movie" && film.isBookmarked === true
+export default function Bookmark() {
+  const { bookmarkedMovies, bookmarkedSeries } = useSelector(
+    (state: any) => state.movies
   );
-  const bookmarkedSeries = films.filter(
-    (film) => film.category === "TV Series" && film.isBookmarked === true
-  );
-
   return (
     <div>
       <Head>
@@ -26,18 +18,25 @@ export default function Bookmark({ films }: DataProps) {
 
       <main className="bg-slate-900 text-white min-h-screen">
         <div className="flex flex-col py-28 lg:pt-4 lg:pl-32 gap-8">
-          <CardList title="Bookmarked Movies" films={bookmarkedFilms} />
-          <CardList title="Bookmarked TV Series" films={bookmarkedSeries} />
+          <div className="max-w-7xl mx-auto px-8 font-extralight">
+            <h1 className="mb-4 text-3xl">Movie</h1>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
+              {bookmarkedMovies.map((movie: any) => (
+                <CardItem key={movie.id} {...movie} />
+              ))}
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-8 font-extralight">
+            <h1 className="mb-4 text-3xl">TV Series</h1>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
+              {bookmarkedSeries.map((series: any) => (
+                <CardItem key={series.id} {...series} />
+              ))}
+            </div>
+          </div>
         </div>
       </main>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const films = await fetchData();
-
-  return {
-    props: { films },
-  };
 }
