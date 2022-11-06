@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { Data } from "../models";
 import {
   addBookmarkToMovies,
@@ -18,6 +19,7 @@ export default function CardItem({
   rating,
 }: Data) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   const handleBookmark = () => {
@@ -36,6 +38,15 @@ export default function CardItem({
       }
     }
   };
+
+  const deleteBookmark = () => {
+    if (category === "Movie") {
+      dispatch(removeBookmarkFromMovies(id));
+    } else if (category === "TV Series") {
+      dispatch(removeBookmarkFromSeries(id));
+    }
+  };
+
   return (
     <div className="card-item" key={id}>
       {/* Card image */}
@@ -49,7 +60,9 @@ export default function CardItem({
         <div className="absolute right-2 top-2 group">
           <button
             className="h-8 w-8 flex justify-center items-center rounded-full bg-black/80 group-hover:bg-white"
-            onClick={handleBookmark}
+            onClick={
+              router.pathname === "/bookmark" ? deleteBookmark : handleBookmark
+            }
           >
             <svg
               width="12"

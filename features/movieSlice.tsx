@@ -24,16 +24,19 @@ export const movieSlice = createSlice({
       );
 
       state.movies[movieIndex].isBookmarked = true;
-      state.bookmarkedMovies.push(state.movies[movieIndex]);
+      state.bookmarkedMovies.push(
+        state.movies.find((element: any) => element.id === action.payload)
+      );
     },
     removeBookmarkFromMovies(state, action) {
       const movieIndex = state.movies.findIndex(
         (element: any) => element.id === action.payload
       );
-      console.log(movieIndex);
 
       state.movies[movieIndex].isBookmarked = false;
-      state.bookmarkedMovies.filter((movie) => movie.id !== action.payload);
+      state.bookmarkedMovies = state.bookmarkedMovies.filter(
+        (element) => element.id !== action.payload
+      );
     },
     addBookmarkToSeries(state, action) {
       const movieIndex = state.movies.findIndex(
@@ -47,10 +50,11 @@ export const movieSlice = createSlice({
       const movieIndex = state.movies.findIndex(
         (element: any) => element.id === action.payload
       );
-      console.log(movieIndex);
 
       state.movies[movieIndex].isBookmarked = false;
-      state.bookmarkedSeries.filter((series) => series.id !== action.payload);
+      state.bookmarkedSeries = state.bookmarkedSeries.filter(
+        (element) => element.id !== action.payload
+      );
     },
   },
 });
