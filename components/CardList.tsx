@@ -10,12 +10,14 @@ interface FilmsProps {
 
 function FilmList({ title, films }: FilmsProps) {
   return (
-    <div className="max-w-7xl mx-auto px-8 font-extralight">
+    <div className="px-8">
       <h1 className="mb-4 text-3xl">{title}</h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
-        {films.map((film: Data) => {
-          return <CardItem {...film} key={film.id} />;
-        })}
+      <div className="max-w-7xl mx-auto font-extralight">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
+          {films.map((film: Data) => {
+            return <CardItem {...film} key={film.id} />;
+          })}
+        </div>
       </div>
     </div>
   );

@@ -18,23 +18,8 @@ export default function Bookmark() {
 
       <main className="bg-slate-900 text-white min-h-screen">
         <div className="flex flex-col py-28 lg:pt-4 lg:pl-32 gap-8">
-          <div className="max-w-7xl mx-auto px-8 font-extralight">
-            <h1 className="mb-4 text-3xl">Movie</h1>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
-              {bookmarkedMovies.map((movie: any) => (
-                <CardItem key={movie.id} {...movie} />
-              ))}
-            </div>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-8 font-extralight">
-            <h1 className="mb-4 text-3xl">TV Series</h1>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
-              {bookmarkedSeries.map((series: any) => (
-                <CardItem key={series.id} {...series} />
-              ))}
-            </div>
-          </div>
+          <CardList title="Movies" films={bookmarkedMovies} />
+          <CardList title="TV Series" films={bookmarkedSeries} />
         </div>
       </main>
     </div>
