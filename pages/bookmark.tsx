@@ -18,8 +18,16 @@ export default function Bookmark() {
 
       <main className="bg-slate-900 text-white min-h-screen">
         <div className="flex flex-col py-28 lg:pt-4 lg:pl-32 gap-8">
-          <CardList title="Movies" films={bookmarkedMovies} />
-          <CardList title="TV Series" films={bookmarkedSeries} />
+          {bookmarkedMovies.length === 0 ? (
+            <p className="text-center">You have no saved movies</p>
+          ) : (
+            <CardList title="Movies" films={bookmarkedMovies} />
+          )}
+          {bookmarkedSeries.length === 0 ? (
+            <p className="text-center">You have no saved TV series</p>
+          ) : (
+            <CardList title="TV Series" films={bookmarkedSeries} />
+          )}
         </div>
       </main>
     </div>
