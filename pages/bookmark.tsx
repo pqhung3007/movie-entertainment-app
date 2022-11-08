@@ -8,6 +8,10 @@ export default function Bookmark() {
   const { bookmarkedMovies, bookmarkedSeries } = useSelector(
     (state: any) => state.movies
   );
+
+  const uniqueBookmarkedMovies = [...new Set(bookmarkedMovies)];
+  const uniqueBookmarkedSeries = [...new Set(bookmarkedSeries)];
+
   return (
     <div>
       <Head>
@@ -21,12 +25,12 @@ export default function Bookmark() {
           {bookmarkedMovies.length === 0 ? (
             <p className="text-center">You have no saved movies</p>
           ) : (
-            <CardList title="Movies" films={bookmarkedMovies} />
+            <CardList title="Movies" films={uniqueBookmarkedMovies} />
           )}
           {bookmarkedSeries.length === 0 ? (
             <p className="text-center">You have no saved TV series</p>
           ) : (
-            <CardList title="TV Series" films={bookmarkedSeries} />
+            <CardList title="TV Series" films={uniqueBookmarkedSeries} />
           )}
         </div>
       </main>
