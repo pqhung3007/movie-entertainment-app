@@ -17,20 +17,21 @@ export default function CardItem({
   year,
   category,
   rating,
+  isBookmarked,
 }: Data) {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [hasBookmark, setHasBookmark] = useState(isBookmarked);
 
   const handleBookmark = () => {
-    setIsBookmarked((prevState) => !prevState);
-    if (isBookmarked === false) {
+    setHasBookmark((prevState) => !prevState);
+    if (hasBookmark === false) {
       if (category === "Movie") {
         dispatch(addBookmarkToMovies(id));
       } else if (category === "TV Series") {
         dispatch(addBookmarkToSeries(id));
       }
-    } else if (isBookmarked === true) {
+    } else if (hasBookmark === true) {
       if (category === "Movie") {
         dispatch(removeBookmarkFromMovies(id));
       } else if (category === "TV Series") {
@@ -69,7 +70,7 @@ export default function CardItem({
               height="14"
               xmlns="http://www.w3.org/2000/svg"
               className={`stroke-white group-hover:stroke-black ${
-                isBookmarked && "fill-white"
+                hasBookmark && "fill-white"
               }`}
             >
               <path
