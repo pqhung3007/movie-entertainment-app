@@ -24,7 +24,7 @@ function Trending({ trendingFilms }: any) {
         {trendingFilms.map((film: Data, index: number) => {
           const { id, title, thumbnail, year, category, rating } = film;
           return (
-            <div className="relative w-2/3" key={id}>
+            <div className="relative" key={id}>
               <SwiperSlide key={index}>
                 <img
                   src={thumbnail.trending.large}

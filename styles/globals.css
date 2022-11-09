@@ -5,7 +5,7 @@
 
 .swiper-slide:nth-child(odd),
 .swiper-slide:nth-child(even) {
-  width: 450px;
+  width: clamp(300px, 80%, 450px);
   height: auto;
 }
 
