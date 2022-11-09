@@ -8,10 +8,14 @@ interface MovieState {
   bookmarkedSeries: Data[];
 }
 
+if (typeof window !== "undefined") {
+  var savedMovies = JSON.parse(localStorage.getItem("movies")!) || [];
+  var savedSeries = JSON.parse(localStorage.getItem("series")!) || [];
+}
 const initialState: MovieState = {
   movies: data,
-  bookmarkedMovies: [],
-  bookmarkedSeries: [],
+  bookmarkedMovies: savedMovies,
+  bookmarkedSeries: savedSeries,
 };
 
 export const movieSlice = createSlice({
@@ -27,6 +31,8 @@ export const movieSlice = createSlice({
       state.bookmarkedMovies.push(
         state.movies.find((element: any) => element.id === action.payload)
       );
+
+      localStorage.setItem("movies", JSON.stringify(state.bookmarkedMovies));
     },
     removeBookmarkFromMovies(state, action) {
       const movieIndex = state.movies.findIndex(
@@ -37,6 +43,8 @@ export const movieSlice = createSlice({
       state.bookmarkedMovies = state.bookmarkedMovies.filter(
         (element) => element.id !== action.payload
       );
+
+      localStorage.setItem("movies", JSON.stringify(state.bookmarkedMovies));
     },
     addBookmarkToSeries(state, action) {
       const movieIndex = state.movies.findIndex(
@@ -45,6 +53,8 @@ export const movieSlice = createSlice({
 
       state.movies[movieIndex].isBookmarked = true;
       state.bookmarkedSeries.push(state.movies[movieIndex]);
+
+      localStorage.setItem("series", JSON.stringify(state.bookmarkedSeries));
     },
     removeBookmarkFromSeries(state, action) {
       const movieIndex = state.movies.findIndex(
@@ -55,6 +65,8 @@ export const movieSlice = createSlice({
       state.bookmarkedSeries = state.bookmarkedSeries.filter(
         (element) => element.id !== action.payload
       );
+
+      localStorage.setItem("series", JSON.stringify(state.bookmarkedSeries));
     },
   },
 });
