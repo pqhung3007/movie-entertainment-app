@@ -25,7 +25,7 @@ function Trending({ trendingFilms }: any) {
           const { id, title, thumbnail, year, category, rating } = film;
           return (
             <div className="relative w-2/3" key={id}>
-              <SwiperSlide>
+              <SwiperSlide key={index}>
                 <img
                   src={thumbnail.trending.large}
                   alt=""
