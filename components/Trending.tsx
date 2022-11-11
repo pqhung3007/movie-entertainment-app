@@ -27,7 +27,7 @@ function Trending({ trendingFilms }: any) {
             <div className="relative" key={id}>
               <SwiperSlide key={index}>
                 <img
-                  src={thumbnail.trending.large}
+                  src={thumbnail.trending?.large}
                   alt=""
                   className="rounded-lg opacity-80"
                 />
