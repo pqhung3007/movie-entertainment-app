@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import data from "../public/data.json";
+import data from "../data/data";
 import { Data } from "../models";
 
 interface MovieState {
-  movies: any;
+  movies: Data[];
   bookmarkedMovies: Data[];
   bookmarkedSeries: Data[];
 }
@@ -28,9 +28,7 @@ export const movieSlice = createSlice({
       );
 
       state.movies[movieIndex].isBookmarked = true;
-      state.bookmarkedMovies.push(
-        state.movies.find((element: any) => element.id === action.payload)
-      );
+      state.bookmarkedMovies.push(state.movies[movieIndex]);
 
       localStorage.setItem("movies", JSON.stringify(state.bookmarkedMovies));
     },

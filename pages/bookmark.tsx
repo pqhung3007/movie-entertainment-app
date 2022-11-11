@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import CardList from "../components/CardList";
-import CardItem from "../components/CardItem";
 import { useSelector } from "react-redux";
 
 export default function Bookmark() {

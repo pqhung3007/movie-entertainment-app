@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import Head from "next/head";
+import { useSelector } from "react-redux";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
-import fetchData from "../utils/fetcher";
 import { Data } from "../models";
 
-interface SeriesProps {
-  series: Data[];
-}
-
-export default function Series({ series }: SeriesProps) {
+export default function Series() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredSeries = series.filter((element) =>
+  const { movies } = useSelector((state: any) => state.movies);
+
+  const filteredSeries = movies.filter((element: Data) =>
     element.title.toLowerCase().includes(searchQuery)
   );
 
@@ -40,22 +38,11 @@ export default function Series({ series }: SeriesProps) {
             />
           ) : (
             <>
-              <CardList title="Movies" films={series} />
+              <CardList title="Movies" films={movies} />
             </>
           )}
         </div>
       </main>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const data = await fetchData();
-  const series = data.filter(
-    (element: Data) => element.category === "TV Series"
-  );
-
-  return {
-    props: { series },
-  };
 }

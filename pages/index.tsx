@@ -1,24 +1,21 @@
 import { useState } from "react";
 import Head from "next/head";
+import { useSelector } from "react-redux";
 import CardList from "../components/CardList";
 import Trending from "../components/Trending";
 import SearchBox from "../components/SearchBox";
 import { Data } from "../models";
-import fetchData from "../utils/fetcher";
-interface DataProps {
-  films: Data[];
-}
 
-export default function Home({ films }: DataProps) {
+export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const trendingFilms: Data[] = films.filter(
-    (film) => film.isTrending === true
+  const { movies } = useSelector((state: any) => state.movies);
+
+  const trendingFilms = movies.filter((film: Data) => film.isTrending === true);
+  const recommendedFilms: Data[] = movies.filter(
+    (film: Data) => film.isTrending === false
   );
-  const recommendedFilms: Data[] = films.filter(
-    (film) => film.isTrending === false
-  );
-  const filteredFilms: Data[] = films.filter((film) =>
+  const filteredFilms: Data[] = movies.filter((film: Data) =>
     film.title.toLowerCase().includes(searchQuery)
   );
 
@@ -53,12 +50,4 @@ export default function Home({ films }: DataProps) {
       </main>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const films = await fetchData();
-
-  return {
-    props: { films },
-  };
 }

@@ -10,10 +10,6 @@ export interface Data {
 }
 
 interface Thumbnail {
-  trending: {
-    small: string;
-    large: string;
-  };
   regular: {
     small: string;
     medium: string;

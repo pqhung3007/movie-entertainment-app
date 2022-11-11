@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import Head from "next/head";
+import { useSelector } from "react-redux";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
-import fetchData from "../utils/fetcher";
 import { Data } from "../models";
-interface MovieProps {
-  movies: Data[];
-}
 
-export default function Movies({ movies }: MovieProps) {
+export default function Movies() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredMovies = movies.filter((element) =>
+  const { movies } = useSelector((state: any) => state.movies);
+  const filteredMovies = movies.filter((element: Data) =>
     element.title.toLowerCase().includes(searchQuery)
   );
 
@@ -46,13 +44,4 @@ export default function Movies({ movies }: MovieProps) {
       </main>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const data = await fetchData();
-  const movies = data.filter((element: Data) => element.category === "Movie");
-
-  return {
-    props: { movies },
-  };
 }
