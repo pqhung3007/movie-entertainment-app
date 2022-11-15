@@ -9,9 +9,13 @@ export default function Movies() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const { movies } = useSelector((state: any) => state.movies);
+  const allMovies = movies.filter((item: any) => item.category === "Movie");
+
   const filteredMovies = movies.filter((element: Data) =>
     element.title.toLowerCase().includes(searchQuery)
   );
+
+  console.log(filteredMovies);
 
   return (
     <div>
@@ -37,7 +41,7 @@ export default function Movies() {
             />
           ) : (
             <>
-              <CardList title="Movies" films={movies} />
+              <CardList title="Movies" films={allMovies} />
             </>
           )}
         </div>
